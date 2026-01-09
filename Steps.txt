@@ -1,0 +1,44 @@
+1- vlans 
+
+all laptops have their vlans on the network: 
+
+10.10.10.0/24
+20.20.20.0/24 
+
+Configure access ports on SW1-SW2-SW3   
+
+
+2- Trunk 
+
+
+Switches SW1 AND SW3 have their trunk links created manually. in SW2 i use DTP (Dynamic trunk protocol) 
+
+on ports e0/1, e0/0 and e0/2 
+
+
+
+3- CDP or LLDP 
+
+cdp is a cisco tecnology and lldp is IEEE model, i would use lldp in networks with multi-vendors. by default, cisco devices already have cdp enable.  
+
+
+4- SVI 
+
+layer two switches does not have ip address by default. so, we have to configure a (switched virtual interface)
+for remote management via telnet or ssh. 
+
+
+5- Spanning-tree 
+
+network topologies over there must have redundancy... but this will cause a loop   and consequently the network goes down. Spanning-tree protocol or (STP) was created to fix this problem. a lot of switches already have spanning tree configured, but, is highly necessary have the knowledge about the protocol. STP have multiple versions like: common stp, per vlan stp+(PVST), Rapid STP, and Multple STP. 
+one better than previous one. i´am  using Rapid STP for rapid convergence.   
+
+also is good to use portfast, bdpuguard or bpdufilter cause, the end user can connect another switch and mess with network. the bpduguard or bpdufiler will take care of this problem. and portfast, will speed end user interface convergence. 
+
+
+
+
+6- etherchannel 
+
+enhancing bandwidth capacity and providing redundancy. but this redundancy might be blocked by stp, so we have the channel-group to aggregate  links looks like one link. this bypass the STP when the he look on his table. we have also L3 etherchannel that obviously uses ip address. to bundle ports. in my case i have  2 links to SW2 and 2 Links to SW, i will create 2 port-channels. if you want to form a aggregation the links must have the same configuration. like speed, duplex and trunk. 
+
